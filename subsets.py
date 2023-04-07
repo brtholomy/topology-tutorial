@@ -6,6 +6,15 @@ import click
 ALPHABET = [chr(i) for i in range(97, 123)]
 
 
+def GetAlphabetPoint(x, y):
+  """Construct point designation using x and y coordinates, allowing for looping
+  boundary condition.
+  """
+  a = ALPHABET[x % len(ALPHABET)]
+  b = ALPHABET[y % len(ALPHABET)]
+  return a + b
+
+
 def SubsetSize(radius):
   """Calculate size of the subset given a radius.
 
@@ -26,18 +35,14 @@ def MakeTopos(ymax, xmax, radius):
         for subx in range(x - radius, x + radius + 1):
           # Rendered as string, to emphasize that this is not a coordinate pair.
           # It's an abstract "point".
-          # radius added back to fix indexing to ALPHABET array
-          subset.add(ALPHABET[subx + radius] + ALPHABET[suby + radius])
+          subset.add(GetAlphabetPoint(subx, suby))
 
       topos.append(subset)
   return topos
 
 
 def RenderSet(subset):
-  points = ""
-  for point in subset:
-    points += point + ","
-  return points
+  return ','.join(p for p in subset)
 
 
 def UniquePoints(topos):
@@ -113,6 +118,7 @@ def Main(xmax, ymax, radius, find, unique, intersect):
   if unique:
     unique_map = UniquePoints(topos)
     print("\n unique point collection:")
+    print("\n unique point size: ", len(unique_map))
     print(RenderSet(unique_map))
 
   if intersect:
