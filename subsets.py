@@ -26,6 +26,12 @@ def SubsetSize(radius):
 
 
 def MakeTopos(ymax, xmax, radius):
+  """Construct our topology as a list of sets.
+
+  The idea is that each set is constructed by the radius and distance function,
+  and is defined solely by its membership distribution of the underlying points.
+  """
+
   topos = []
   for y in range (ymax):
     for x in range(xmax):
@@ -42,10 +48,14 @@ def MakeTopos(ymax, xmax, radius):
 
 
 def RenderSet(subset):
+  """Transform our sets into a string.
+  """
   return ','.join(p for p in subset)
 
 
 def UniquePoints(topos):
+  """Generate a set of all solely unique points within the topology.
+  """
   unique_map = set()
   for sub in topos:
     for point in sub:
@@ -54,6 +64,8 @@ def UniquePoints(topos):
 
 
 def IntersectedPoints(topos):
+  """Generate a set of all points represented more than once.
+  """
   # hack to get it started
   intermap = topos[0].intersection(topos[1])
   for x,sub in enumerate(topos):
@@ -62,6 +74,10 @@ def IntersectedPoints(topos):
 
 
 def FindPoint(topos, point):
+  """Generate a list of all subsets containing the given point.
+
+  This can then be used to calculate the 'granularity' of this topology.
+  """
   submap = []
   for sub in topos:
     for subpoint in sub:
