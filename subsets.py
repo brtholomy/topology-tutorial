@@ -91,20 +91,17 @@ def FindPoint(topos, point):
 )
 @click.option(
     '--find', '-f',
-    default='',
-    show_default=True,
+    type=str,
     help='point to search for. Two character string, lowercase.'
 )
 @click.option(
     '--unique', '-u',
-    default=False,
-    show_default=True,
+    is_flag=True,
     help='whether to print out the unique set of all points.'
 )
 @click.option(
     '--intersect', '-i',
-    default=False,
-    show_default=True,
+    is_flag=True,
     help='whether to print out the intersected set of all points.'
 )
 def Main(xmax, ymax, radius, find, unique, intersect):
