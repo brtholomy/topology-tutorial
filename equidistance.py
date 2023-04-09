@@ -1,3 +1,6 @@
+# Example application of 1 dimensional metric space, and the possible runtime
+# complexities of various search and/or crawl functions within that space.
+
 import math
 import random
 import sys
@@ -116,7 +119,8 @@ def SearchIntervals(ls, cost_d, leftinterval, rightinterval, maxinterval):
 def LikeliestBigO(iters, size, maxinterval):
   """Gives a rough idea of O() complexity.
 
-  Note: in the stricter sense, we should only return the positive delta.
+  Note: in the stricter sense, we should only return a delta < iters, since O()
+  is a limit.
   """
 
   runtimes = {
